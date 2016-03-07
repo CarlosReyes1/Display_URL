@@ -18,5 +18,5 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/", gun)
 
-	http.ListenAndServe(":8080", mux)
+	http.ListenAndServe(":2060", mux)
 }
