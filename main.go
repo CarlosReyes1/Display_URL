@@ -2,19 +2,21 @@ package main
 
 import (
 	"io"
-	"log"
 	"net/http"
 )
 
-func main() {
-	http.HandleFunc("/printURL/", printURL)
-	err := http.ListenAndServe(":2060", nil)
+type Shoot int
 
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+func (h Shoot ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	res.Header().Set("Content-Type", "text/html; charset=utf-8")
+	io.WriteString(res, `<h1>`+req.URL.Path+`</h1><br>`)
 }
 
-func printURL(w http.ResponseWriter, req *http.Request) {
-	io.WriteString(w, req.URL.Path)
+func main() {
+	var gun Shoot
+
+	mux := http.NewServeMux()
+	mux.Handle("/", gun)
+
+	http.ListenAndServe(":8080", mux)
 }
